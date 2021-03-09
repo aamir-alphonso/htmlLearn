@@ -4,7 +4,11 @@ const host = "localhost";
 const port = 8000
 
 const requestListener = function(req, res){
-    fs.readFile(__dirname + "/index.html")
+    // Changes are made in the next 3 lines
+    if(req.url=='/')
+        req.url = "/index.html"
+    fs.readFile(__dirname + req.url)
+    
     .then(contents => {
         res.setHeader("Content-Type", "text/html");
         res.writeHead(200);
